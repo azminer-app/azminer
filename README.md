@@ -174,7 +174,7 @@ the package.
 ## Supported GPUs
 
 azminer targets NVIDIA **Turing, Ampere, Ada and Blackwell** (SM 7.5 / 8.6 / 8.9 / 12.0).
-**Pascal (GTX 10xx) and older are not supported.**
+Support for **Pascal (GTX 10xx)** is **coming soon**.
 
 | Generation | Example cards | Status |
 | --- | --- | --- |
@@ -182,7 +182,7 @@ azminer targets NVIDIA **Turing, Ampere, Ada and Blackwell** (SM 7.5 / 8.6 / 8.9
 | Ada (RTX 40xx) | RTX 4070 Ti, 4070 SUPER, 4060 Ti | ✅ Supported |
 | Ampere (RTX 30xx) | RTX 3080, 3070, 3060 Ti | ✅ Supported |
 | Turing (RTX 20xx / GTX 16xx) | RTX 2070 SUPER, GTX 1660 Ti | ✅ Supported |
-| Pascal (GTX 10xx) | GTX 1080 Ti, 1060 | ❌ Not supported |
+| Pascal (GTX 10xx) | GTX 1080 Ti, 1060 | 🕒 Coming soon |
 
 ### Measured performance
 
@@ -223,8 +223,8 @@ Get-FileHash .\azminer-v0.1.0-windows-x86_64.zip -Algorithm SHA256
 
 ## FAQ
 
-**Does it work on Pascal (GTX 10xx)?** No. CUDA initialization fails on Pascal and
-older; the miner needs Turing (SM 7.5) or newer.
+**Does it work on Pascal (GTX 10xx)?** Not yet — Pascal support is coming soon.
+Today the miner needs Turing (SM 7.5) or newer.
 
 **Is there a dev fee?** Yes, 2% on both coins. It is already included in the
 hashrate figures above.
