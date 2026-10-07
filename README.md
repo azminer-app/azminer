@@ -6,7 +6,7 @@
 
 No Python, no WSL, no extra runtimes — a single binary that starts in a second.
 
-[![Version](https://img.shields.io/badge/version-0.1.0-2563eb)](https://github.com/azminer-app/azminer/releases)
+[![Version](https://img.shields.io/badge/version-1.2.0-2563eb)](https://github.com/azminer-app/azminer/releases)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-334155)](#download)
 [![GPU](https://img.shields.io/badge/NVIDIA-Turing%20%E2%86%92%20Blackwell-76b900)](#supported-gpus)
 [![Dev fee](https://img.shields.io/badge/dev%20fee-2%25-f59e0b)](#coins--dev-fee)
@@ -40,9 +40,9 @@ Grab the latest build from the [**Releases**](https://github.com/azminer-app/azm
 
 | Platform | Package | Notes |
 | --- | --- | --- |
-| **Windows** (x86_64) | `azminer-v0.1.0-windows-x86_64.zip` | Windows 10/11, NVIDIA driver installed |
-| **Linux** (x86_64) | `azminer-v0.1.0-linux-x86_64.tar.gz` | GLIBC ≥ 2.28, includes the HiveOS package |
-| **Integrations bundle** | `azminer-v0.1.0.tar.gz` | HiveOS custom-miner package + helper scripts |
+| **Windows** (x86_64) | `azminer-v1.2.0-windows-x86_64.zip` | Windows 10/11, NVIDIA driver installed. Includes `start-pearl.bat` / `start-quantus.bat`. |
+| **Linux** (x86_64) | `azminer-v1.2.0-linux-x86_64` | Standalone binary, GLIBC ≥ 2.28. `chmod +x` and run. |
+| **HiveOS / integrations** | `azminer-v1.2.0.tar.gz` | HiveOS custom-miner package (binary + `h-*.sh` scripts). |
 
 Each release also ships a `SHA256SUMS` file — see [Verifying your download](#verifying-your-download).
 
@@ -53,7 +53,7 @@ pools. Open the launcher, set your wallet, and run it.
 
 ### Windows
 
-1. Unzip `azminer-v0.1.0-windows-x86_64.zip`.
+1. Unzip `azminer-v1.2.0-windows-x86_64.zip`.
 2. Open `start-pearl.bat` (or `start-quantus.bat`) in Notepad and set your wallet:
    ```bat
    set "WALLET=YOUR_PEARL_WALLET"
@@ -63,10 +63,9 @@ pools. Open the launcher, set your wallet, and run it.
 ### Linux
 
 ```bash
-tar xzf azminer-v0.1.0-linux-x86_64.tar.gz
-cd azminer-v0.1.0-linux-x86_64
-# edit start-pearl.sh and set WALLET=...
-./start-pearl.sh
+chmod +x azminer-v1.2.0-linux-x86_64
+./azminer-v1.2.0-linux-x86_64 -a pearl \
+  -o stratum+tcp://prl.kryptex.network:7048 -u WALLET.worker
 ```
 
 ### Run it by hand
@@ -154,8 +153,8 @@ curl -s http://127.0.0.1:3333/stats.json     # human-readable stats
 
 ## HiveOS / RaveOS
 
-The Linux package contains a custom-miner bundle under `hiveos/azminer/`
-(the standalone `azminer-v0.1.0.tar.gz` ships the same files).
+The `azminer-v1.2.0.tar.gz` package is the HiveOS custom-miner bundle — the
+`azminer` binary plus the `h-*.sh` scripts and a README.
 
 1. Copy the `azminer/` folder to `/hive/miners/custom/azminer/` on the rig and make
    the binary executable (`chmod +x azminer`).
@@ -218,7 +217,7 @@ Every release includes `SHA256SUMS`. After downloading, check the archive agains
 sha256sum -c SHA256SUMS
 
 # Windows (PowerShell)
-Get-FileHash .\azminer-v0.1.0-windows-x86_64.zip -Algorithm SHA256
+Get-FileHash .\azminer-v1.2.0-windows-x86_64.zip -Algorithm SHA256
 ```
 
 ## FAQ
