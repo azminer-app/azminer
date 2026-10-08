@@ -1,0 +1,20 @@
+# Secrets — never commit
+.keysecret/
+*.pem
+*.key
+id_ed25519*
+*token*.txt
+
+# Release binaries / archives (published as GitHub Release assets, not in git)
+*.tar.gz
+*.zip
+*.exe
+SHA256SUMS
+/azminer
+/azminer-v*/
+azminer-v*-linux-x86_64
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp

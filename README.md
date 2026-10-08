@@ -6,7 +6,7 @@
 
 No Python, no WSL, no extra runtimes — a single binary that starts in a second.
 
-[![Version](https://img.shields.io/badge/version-1.2.0-2563eb)](https://github.com/azminer-app/azminer/releases)
+[![Version](https://img.shields.io/badge/version-1.2.1-2563eb)](https://github.com/azminer-app/azminer/releases)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-334155)](#download)
 [![GPU](https://img.shields.io/badge/NVIDIA-Turing%20%E2%86%92%20Blackwell-76b900)](#supported-gpus)
 [![Dev fee](https://img.shields.io/badge/dev%20fee-2%25-f59e0b)](#coins--dev-fee)
@@ -40,9 +40,9 @@ Grab the latest build from the [**Releases**](https://github.com/azminer-app/azm
 
 | Platform | Package | Notes |
 | --- | --- | --- |
-| **Windows** (x86_64) | `azminer-v1.2.0-windows-x86_64.zip` | Windows 10/11, NVIDIA driver installed. Includes `start-pearl.bat` / `start-quantus.bat`. |
-| **Linux** (x86_64) | `azminer-v1.2.0-linux-x86_64` | Standalone binary, GLIBC ≥ 2.28. `chmod +x` and run. |
-| **HiveOS / integrations** | `azminer-v1.2.0.tar.gz` | HiveOS custom-miner package (binary + `h-*.sh` scripts). |
+| **Windows** (x86_64) | `azminer-v1.2.1-windows-x86_64.zip` | Windows 10/11, NVIDIA driver installed. Includes `start-pearl.bat` / `start-quantus.bat`. |
+| **Linux** (x86_64) | `azminer-v1.2.1-linux-x86_64` | Standalone binary, GLIBC ≥ 2.28. `chmod +x` and run. |
+| **HiveOS / integrations** | `azminer-v1.2.1.tar.gz` | HiveOS custom-miner package (binary + `h-*.sh` scripts). |
 
 Each release also ships a `SHA256SUMS` file — see [Verifying your download](#verifying-your-download).
 
@@ -53,7 +53,7 @@ pools. Open the launcher, set your wallet, and run it.
 
 ### Windows
 
-1. Unzip `azminer-v1.2.0-windows-x86_64.zip`.
+1. Unzip `azminer-v1.2.1-windows-x86_64.zip`.
 2. Open `start-pearl.bat` (or `start-quantus.bat`) in Notepad and set your wallet:
    ```bat
    set "WALLET=YOUR_PEARL_WALLET"
@@ -63,8 +63,8 @@ pools. Open the launcher, set your wallet, and run it.
 ### Linux
 
 ```bash
-chmod +x azminer-v1.2.0-linux-x86_64
-./azminer-v1.2.0-linux-x86_64 -a pearl \
+chmod +x azminer-v1.2.1-linux-x86_64
+./azminer-v1.2.1-linux-x86_64 -a pearl \
   -o stratum+tcp://prl.kryptex.network:7048 -u WALLET.worker
 ```
 
@@ -153,7 +153,7 @@ curl -s http://127.0.0.1:3333/stats.json     # human-readable stats
 
 ## HiveOS / RaveOS
 
-The `azminer-v1.2.0.tar.gz` package is the HiveOS custom-miner bundle — the
+The `azminer-v1.2.1.tar.gz` package is the HiveOS custom-miner bundle — the
 `azminer` binary plus the `h-*.sh` scripts and a README.
 
 1. Copy the `azminer/` folder to `/hive/miners/custom/azminer/` on the rig and make
@@ -188,25 +188,27 @@ Support for **Pascal (GTX 10xx)** is **coming soon**.
 From the hardware regression sweep (stock-ish clocks; results vary with driver,
 cooling and overclock). Pearl and Quantus are different algorithms, so their
 hashrates are **not** comparable to each other — only across cards within one coin.
+Quantus (`qpow-poseidon2`) figures reflect the ~10% throughput improvement shipped
+in **v1.2.1**.
 
 | GPU | Gen | Pearl (`pearlhash`) | Quantus (`qpow-poseidon2`) | Power |
 | --- | --- | --- | --- | --- |
-| RTX 4070 Ti | Ada | 162.6 TH/s | 630.5 MH/s | ~284 W |
-| RTX 4070 SUPER | Ada | 143.2 TH/s | 557.9 MH/s | ~218 W |
-| RTX 5060 Ti | Blackwell | 99.5 TH/s | 374.9 MH/s | ~165 W |
-| RTX 5070 Ti | Blackwell | 96.5 TH/s | 347.3 MH/s | ~94 W |
-| RTX 4060 Ti | Ada | 89.6 TH/s | 352.0 MH/s | ~165 W |
-| RTX 3070 | Ampere | 80.0 TH/s | 322.9 MH/s | ~219 W |
-| RTX 3080 | Ampere | 75.3 TH/s | 370.8 MH/s | ~190 W |
-| RTX 3060 Ti | Ampere | 65.3 TH/s | 269.2 MH/s | ~180 W |
-| RTX 4060 | Ada | 61.8 TH/s | 257.3 MH/s | ~114 W |
-| RTX 2070 SUPER | Turing | 61.5 TH/s | 259.2 MH/s | ~206 W |
-| RTX 2060 | Turing | 49.5 TH/s | 210.7 MH/s | ~188 W |
-| RTX 3060 | Ampere | 43.5 TH/s | 182.8 MH/s | ~110 W |
-| RTX 3060 Laptop | Ampere | 34.0 TH/s | 161.3 MH/s | ~60 W |
-| RTX 5060 Laptop | Blackwell | 27.8 TH/s | 130.8 MH/s | ~27 W |
-| GTX 1660 Ti | Turing | 1.18 TH/s | 159.1 MH/s | ~57 W |
-| GTX 1660 SUPER | Turing | 1.08 TH/s | 148.0 MH/s | ~59 W |
+| RTX 4070 Ti | Ada | 162.6 TH/s | 693.6 MH/s | ~284 W |
+| RTX 4070 SUPER | Ada | 143.2 TH/s | 613.7 MH/s | ~218 W |
+| RTX 5060 Ti | Blackwell | 99.5 TH/s | 412.4 MH/s | ~165 W |
+| RTX 5070 Ti | Blackwell | 96.5 TH/s | 382.0 MH/s | ~94 W |
+| RTX 4060 Ti | Ada | 89.6 TH/s | 387.2 MH/s | ~165 W |
+| RTX 3070 | Ampere | 80.0 TH/s | 355.2 MH/s | ~219 W |
+| RTX 3080 | Ampere | 75.3 TH/s | 407.9 MH/s | ~190 W |
+| RTX 3060 Ti | Ampere | 65.3 TH/s | 296.1 MH/s | ~180 W |
+| RTX 4060 | Ada | 61.8 TH/s | 283.0 MH/s | ~114 W |
+| RTX 2070 SUPER | Turing | 61.5 TH/s | 285.1 MH/s | ~206 W |
+| RTX 2060 | Turing | 49.5 TH/s | 231.8 MH/s | ~188 W |
+| RTX 3060 | Ampere | 43.5 TH/s | 201.1 MH/s | ~110 W |
+| RTX 3060 Laptop | Ampere | 34.0 TH/s | 177.4 MH/s | ~60 W |
+| RTX 5060 Laptop | Blackwell | 27.8 TH/s | 143.9 MH/s | ~27 W |
+| GTX 1660 Ti | Turing | 1.18 TH/s | 175.0 MH/s | ~57 W |
+| GTX 1660 SUPER | Turing | 1.08 TH/s | 162.8 MH/s | ~59 W |
 
 ## Verifying your download
 
@@ -217,7 +219,7 @@ Every release includes `SHA256SUMS`. After downloading, check the archive agains
 sha256sum -c SHA256SUMS
 
 # Windows (PowerShell)
-Get-FileHash .\azminer-v1.2.0-windows-x86_64.zip -Algorithm SHA256
+Get-FileHash .\azminer-v1.2.1-windows-x86_64.zip -Algorithm SHA256
 ```
 
 ## FAQ
