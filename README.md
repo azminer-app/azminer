@@ -12,15 +12,15 @@ azminer is a self-contained executable with pool failover, per-GPU tuning, tempe
 
 ## Download
 
-Packages below are for **v1.2.2**. See [Releases](https://github.com/azminer-app/azminer/releases/latest) for the current version.
+Packages below are for **v1.2.3**. See [Releases](https://github.com/azminer-app/azminer/releases/latest) for the current version.
 
 | Platform | Download | Requirements |
 | --- | --- | --- |
-| **Windows x86_64** | [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.2/azminer-v1.2.2-windows-x86_64.zip) | Windows 10/11 and an NVIDIA driver |
-| **Linux x86_64** | [Standalone binary](https://github.com/azminer-app/azminer/releases/download/v1.2.2/azminer-v1.2.2-linux-x86_64) | GLIBC ≥ 2.28 and an NVIDIA driver |
-| **Rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.2/azminer-v1.2.2.tar.gz) | Binary, integration scripts and setup instructions |
+| **Windows x86_64** | [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.3/azminer-v1.2.3-windows-x86_64.zip) | Windows 10/11 and an NVIDIA driver |
+| **Linux x86_64** | [Standalone binary](https://github.com/azminer-app/azminer/releases/download/v1.2.3/azminer-v1.2.3-linux-x86_64) | GLIBC ≥ 2.28 and an NVIDIA driver |
+| **Rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.3/azminer-v1.2.3.tar.gz) | Binary, integration scripts and setup instructions |
 
-[SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.2.2/SHA256SUMS) is available for download verification.
+[SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.2.3/SHA256SUMS) is available for download verification.
 
 <details>
 <summary><strong>Verify a download</strong></summary>
@@ -36,7 +36,7 @@ sha256sum --ignore-missing -c SHA256SUMS
 **Windows PowerShell**
 
 ```powershell
-Get-FileHash .\azminer-v1.2.2-windows-x86_64.zip -Algorithm SHA256
+Get-FileHash .\azminer-v1.2.3-windows-x86_64.zip -Algorithm SHA256
 ```
 
 Compare the returned hash with the entry for that filename in `SHA256SUMS`.
@@ -65,7 +65,7 @@ Download the binary and make it executable:
 
 ```bash
 curl -fL -o azminer \
-  https://github.com/azminer-app/azminer/releases/download/v1.2.2/azminer-v1.2.2-linux-x86_64
+  https://github.com/azminer-app/azminer/releases/download/v1.2.3/azminer-v1.2.3-linux-x86_64
 chmod +x azminer
 ```
 
@@ -117,7 +117,7 @@ azminer is **NVIDIA-only**. The current build targets SM **7.5, 8.6, 8.9 and 12.
 | Ada Lovelace | RTX 40xx | Supported |
 | Ampere | RTX 30xx | Supported |
 | Turing | RTX 20xx / GTX 16xx | Supported |
-| Pascal | GTX 10xx | Planned; unavailable in v1.2.2 |
+| Pascal | GTX 10xx | Planned; unavailable in v1.2.3 |
 
 Run `azminer -list` to check detected CUDA devices and route support.
 
@@ -214,7 +214,7 @@ The API also answers `miner_getstat1` and `miner_getstat2` for compatible monito
 
 ## Rig integration
 
-Extract the [integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.2/azminer-v1.2.2.tar.gz) and follow its package README.
+Extract the [integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.3/azminer-v1.2.3.tar.gz) and follow its package README.
 
 Set the miner name to `azminer`, choose `pearl`, `quantus` or `parano1d`, and provide your pool endpoint and login. Optional extra arguments include `-g 0` or `-g all`.
 
