@@ -123,28 +123,35 @@ Run `azminer -list` to check detected CUDA devices and route support.
 
 ## Performance
 
-Measurements come from the project's hardware regression sweep with approximately stock clocks. Results vary with driver, cooling and tuning. **Compare hashrates within the same coin.**
+Quantus hashrates for v1.2.5:
 
-| GPU | Generation | Pearl | Quantus | Reported power |
-| --- | --- | ---: | ---: | ---: |
-| RTX 4070 Ti | Ada | 162.6 TH/s | 693.6 MH/s | ~284 W |
-| RTX 4070 SUPER | Ada | 143.2 TH/s | 613.7 MH/s | ~218 W |
-| RTX 5060 Ti | Blackwell | 99.5 TH/s | 412.4 MH/s | ~165 W |
-| RTX 5070 Ti | Blackwell | 96.5 TH/s | 382.0 MH/s | ~94 W |
-| RTX 4060 Ti | Ada | 89.6 TH/s | 387.2 MH/s | ~165 W |
-| RTX 3070 | Ampere | 80.0 TH/s | 355.2 MH/s | ~219 W |
-| RTX 3080 | Ampere | 75.3 TH/s | 407.9 MH/s | ~190 W |
-| RTX 3060 Ti | Ampere | 65.3 TH/s | 296.1 MH/s | ~180 W |
-| RTX 4060 | Ada | 61.8 TH/s | 283.0 MH/s | ~114 W |
-| RTX 2070 SUPER | Turing | 61.5 TH/s | 285.1 MH/s | ~206 W |
-| RTX 2060 | Turing | 49.5 TH/s | 231.8 MH/s | ~188 W |
-| RTX 3060 | Ampere | 43.5 TH/s | 201.1 MH/s | ~110 W |
-| RTX 3060 Laptop | Ampere | 34.0 TH/s | 177.4 MH/s | ~60 W |
-| RTX 5060 Laptop | Blackwell | 27.8 TH/s | 143.9 MH/s | ~27 W |
-| GTX 1660 Ti | Turing | 1.18 TH/s | 175.0 MH/s | ~57 W |
-| GTX 1660 SUPER | Turing | 1.08 TH/s | 162.8 MH/s | ~59 W |
+| GPU | Quantus |
+| --- | ---: |
+| RTX 3080 | 543.89 MH/s |
+| RTX 3090 | 608.61 MH/s |
+| RTX 4060 | 275.23 MH/s |
+| RTX 4090 | 1,359.14 MH/s |
+| RTX 5060 Ti | 407.34 MH/s |
 
-Hashrates include the 2% miner dev fee. Each row has one reported power figure; separate power measurements for each coin are not provided.
+Hashrates include the 2% miner dev fee.
+
+The following GPUs are also supported. Their v1.2.5 hashrates will be added in a future update:
+
+- RTX 4070 Ti
+- RTX 4070 SUPER
+- RTX 5070 Ti
+- RTX 4060 Ti
+- RTX 3070
+- RTX 3060 Ti
+- RTX 2070 SUPER
+- RTX 2060
+- RTX 3060
+- RTX 3060 Laptop
+- RTX 5060 Laptop
+- GTX 1660 Ti
+- GTX 1660 SUPER
+
+Actual performance varies with the GPU model, driver, cooling and tuning. See [GPU support](#gpu-support) for compatible families.
 
 ## Options
 
