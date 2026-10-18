@@ -12,15 +12,15 @@ azminer is a self-contained executable with pool failover, per-GPU tuning, tempe
 
 ## Download
 
-Packages below are for **v1.2.5**. See [Releases](https://github.com/azminer-app/azminer/releases/latest) for the current version.
+Packages below are for **v1.2.6**. See [Releases](https://github.com/azminer-app/azminer/releases/latest) for the current version.
 
 | Platform | Download | Requirements |
 | --- | --- | --- |
-| **Windows x86_64** | [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.5/azminer-v1.2.5-windows-x86_64.zip) | Windows 10/11 and an NVIDIA driver |
-| **Linux x86_64** | [Standalone binary](https://github.com/azminer-app/azminer/releases/download/v1.2.5/azminer-v1.2.5-linux-x86_64) | GLIBC ≥ 2.28 and an NVIDIA driver |
-| **Rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.5/azminer-v1.2.5.tar.gz) | Binary, integration scripts and setup instructions |
+| **Windows x86_64** | [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.6/azminer-v1.2.6-windows-x86_64.zip) | Windows 10/11 and an NVIDIA driver |
+| **Linux x86_64** | [Standalone binary](https://github.com/azminer-app/azminer/releases/download/v1.2.6/azminer-v1.2.6-linux-x86_64) | GLIBC ≥ 2.28 and an NVIDIA driver |
+| **Rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.6/azminer-v1.2.6.tar.gz) | Binary, integration scripts and setup instructions |
 
-[SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.2.5/SHA256SUMS) is available for download verification.
+[SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.2.6/SHA256SUMS) is available for download verification.
 
 <details>
 <summary><strong>Verify a download</strong></summary>
@@ -36,7 +36,7 @@ sha256sum --ignore-missing -c SHA256SUMS
 **Windows PowerShell**
 
 ```powershell
-Get-FileHash .\azminer-v1.2.5-windows-x86_64.zip -Algorithm SHA256
+Get-FileHash .\azminer-v1.2.6-windows-x86_64.zip -Algorithm SHA256
 ```
 
 Compare the returned hash with the entry for that filename in `SHA256SUMS`.
@@ -65,7 +65,7 @@ Download the binary and make it executable:
 
 ```bash
 curl -fL -o azminer \
-  https://github.com/azminer-app/azminer/releases/download/v1.2.5/azminer-v1.2.5-linux-x86_64
+  https://github.com/azminer-app/azminer/releases/download/v1.2.6/azminer-v1.2.6-linux-x86_64
 chmod +x azminer
 ```
 
@@ -117,7 +117,7 @@ azminer is **NVIDIA-only**. The current build targets SM **7.5, 8.6, 8.9 and 12.
 | Ada Lovelace | RTX 40xx | Supported |
 | Ampere | RTX 30xx | Supported |
 | Turing | RTX 20xx / GTX 16xx | Supported |
-| Pascal | GTX 10xx | Planned; unavailable in v1.2.5 |
+| Pascal | GTX 10xx | Planned; unavailable in v1.2.6 |
 
 Run `azminer -list` to check detected CUDA devices and route support.
 
@@ -132,6 +132,22 @@ Quantus hashrates for v1.2.5:
 | RTX 4060 | 275.23 MH/s |
 | RTX 4090 | 1,359.14 MH/s |
 | RTX 5060 Ti | 407.34 MH/s |
+
+Pearl hashrates for v1.2.6:
+
+| GPU | Pearl |
+| --- | ---: |
+| RTX 3060 12GB | 52.098 TH/s |
+| RTX 3070 8GB | 80.299 TH/s |
+| RTX 3080 10GB | 123.269 TH/s |
+| RTX 3090 24GB | 134.481 TH/s |
+| RTX 4060 Ti 16GB | 94.640 TH/s |
+| RTX 4070 Ti SUPER 16GB | 176.692 TH/s |
+| RTX 4090 24GB | 327.571 TH/s |
+| RTX 5060 8GB | 79.321 TH/s |
+| RTX 5060 Ti 16GB | 93.306 TH/s |
+| RTX 5070 Ti 16GB | 195.083 TH/s |
+| RTX 5090 32GB | 408.034 TH/s |
 
 Hashrates include the 2% miner dev fee.
 
@@ -221,7 +237,7 @@ The API also answers `miner_getstat1` and `miner_getstat2` for compatible monito
 
 ## Rig integration
 
-Extract the [integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.5/azminer-v1.2.5.tar.gz) and follow its package README.
+Extract the [integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.6/azminer-v1.2.6.tar.gz) and follow its package README.
 
 Set the miner name to `azminer`, choose `pearl`, `quantus` or `parano1d`, and provide your pool endpoint and login. Optional extra arguments include `-g 0` or `-g all`.
 
