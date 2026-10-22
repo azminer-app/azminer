@@ -4,6 +4,8 @@
 
 [![Release](https://img.shields.io/github/v/release/azminer-app/azminer?label=release&color=2563eb)](https://github.com/azminer-app/azminer/releases/latest) [![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-334155)](#download) [![Dev fee](https://img.shields.io/badge/dev%20fee-2%25-f59e0b)](#supported-coins)
 
+[![Website](https://img.shields.io/badge/website-azminer.app-f2a65a)](https://azminer.app) [![Telegram](https://img.shields.io/badge/Telegram-join%20chat-26a5e4?logo=telegram&logoColor=white)](https://t.me/+DYOBpOCui9EzNDM1) [![Discord](https://img.shields.io/badge/Discord-join%20server-5865f2?logo=discord&logoColor=white)](https://discord.gg/VSpskAtb7)
+
 [Download](#download) · [Quick start](#quick-start) · [GPU support](#gpu-support) · [Performance](#performance) · [Options](#options) · [API](#monitoring-api)
 
 </div>
