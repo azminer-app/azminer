@@ -118,15 +118,17 @@ The fee is collected through short, periodic mining intervals using the develope
 
 ## GPU support
 
-azminer is **NVIDIA-only**. The current build targets SM **7.5, 8.6, 8.9 and 12.0**.
+azminer is **NVIDIA-only**. The current build targets SM **7.5, 8.6, 8.9 and 12.0** for all coins. Vearl additionally runs on SM **6.0, 6.1, 7.0 and 8.0**.
 
 | Architecture | GPU family | Status |
 | --- | --- | --- |
 | Blackwell | RTX 50xx | Supported |
 | Ada Lovelace | RTX 40xx | Supported |
 | Ampere | RTX 30xx | Supported |
+| Ampere (data center) | A100 | Vearl only |
 | Turing | RTX 20xx / GTX 16xx | Supported |
-| Pascal | GTX 10xx | Planned; unavailable in v1.2.9 |
+| Volta | Tesla V100 | Vearl only |
+| Pascal | GTX 10xx / Tesla P100 | Vearl only; other coins planned |
 
 Run `azminer -list` to check detected CUDA devices and route support.
 
@@ -176,21 +178,23 @@ Pearl hashrates for v1.2.9:
 
 v1.2.9 improves Pearl hashrate on RTX 30xx, 40xx and 50xx by roughly 0.4–6.6% over v1.2.8 (typically about 1%).
 
-Vearl hashrates for v1.2.8:
+Vearl hashrates for v1.2.9:
 
 | GPU | Vearl | Power | Core / Mem |
 | --- | ---: | ---: | --- |
-| RTX 2060 Super | 126.664 MH/s | 107.67 W | 1459.8 / 6801 MHz |
-| RTX 3060 | 148.298 MH/s | 165.30 W | 1912 / 7301 MHz |
-| RTX 3080 | 406.391 MH/s | 368.91 W | 1822.8 / 9251 MHz |
-| RTX 3090 | 401.259 MH/s | 348.54 W | 1663 / 9501 MHz |
-| RTX 4060 | 234.137 MH/s | n/a | 2512.8 / 8251 MHz |
-| RTX 4060 Ti | 329.510 MH/s | 164.63 W | 2595.5 / 8751 MHz |
-| RTX 5060 | 291.454 MH/s | 136.87 W | 2641.2 / 13801 MHz |
-| RTX 5060 Ti | 373.452 MH/s | 179.99 W | 2821.3 / 13801 MHz |
-| RTX 5090 | 1,628.029 MH/s | 599.98 W | 2656.9 / 13801 MHz |
+| Tesla P100 PCIe 16GB | 3.61 MH/s | 142.7 W | 1328 / 715 MHz |
+| GTX 1080 | 6.49 MH/s | 130.0 W | 1794 / 4513 MHz |
+| Tesla V100 SXM2 32GB | 29.04 MH/s | 196.6 W | 1330 / 877 MHz |
+| RTX 2060 | 75.99 MH/s | 127.3 W | 1498 / 6801 MHz |
+| A100 PCIe 40GB | 274.92 MH/s | 248.8 W | 1166 / 1215 MHz |
+| RTX 3060 | 86.62 MH/s | 127.2 W | 1518 / 7508 MHz |
+| RTX 3090 | 126.68 MH/s | 219.8 W | 704 / 9501 MHz |
+| RTX 4060 | 120.64 MH/s | 114.0 W | 2491 / 8251 MHz |
+| RTX 4090 | 368.94 MH/s | 298.9 W | 2392 / 10251 MHz |
+| RTX 5060 | 128.60 MH/s | 145.0 W | 2661 / 13801 MHz |
+| RTX 5090 | 376.74 MH/s | 499.9 W | 2852 / 13801 MHz |
 
-Hashrates include the 2% miner dev fee.
+Hashrates include the 2% miner dev fee. The tables list the GPUs measured so far; a GPU that is not listed is still supported if its architecture appears under [GPU support](#gpu-support).
 
 The following GPUs are also supported. Their v1.2.5 hashrates will be added in a future update:
 
