@@ -12,15 +12,15 @@ azminer is a self-contained executable with pool failover, per-GPU tuning, tempe
 
 ## Download
 
-Packages below are for **v1.2.8**. See [Releases](https://github.com/azminer-app/azminer/releases/latest) for the current version.
+Packages below are for **v1.2.9**. See [Releases](https://github.com/azminer-app/azminer/releases/latest) for the current version.
 
 | Platform | Download | Requirements |
 | --- | --- | --- |
-| **Windows x86_64** | [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.8/azminer-v1.2.8-windows-x86_64.zip) | Windows 10/11 and an NVIDIA driver |
-| **Linux x86_64** | [Standalone binary](https://github.com/azminer-app/azminer/releases/download/v1.2.8/azminer-v1.2.8-linux-x86_64) | GLIBC ≥ 2.28 and an NVIDIA driver |
-| **Rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.8/azminer-v1.2.8.tar.gz) | Binary, integration scripts and setup instructions |
+| **Windows x86_64** | [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-windows-x86_64.zip) | Windows 10/11 and an NVIDIA driver |
+| **Linux x86_64** | [Standalone binary](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-linux-x86_64) | GLIBC ≥ 2.28 and an NVIDIA driver |
+| **Rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9.tar.gz) | Binary, integration scripts and setup instructions |
 
-[SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.2.8/SHA256SUMS) is available for download verification.
+[SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.2.9/SHA256SUMS) is available for download verification.
 
 <details>
 <summary><strong>Verify a download</strong></summary>
@@ -36,7 +36,7 @@ sha256sum --ignore-missing -c SHA256SUMS
 **Windows PowerShell**
 
 ```powershell
-Get-FileHash .\azminer-v1.2.8-windows-x86_64.zip -Algorithm SHA256
+Get-FileHash .\azminer-v1.2.9-windows-x86_64.zip -Algorithm SHA256
 ```
 
 Compare the returned hash with the entry for that filename in `SHA256SUMS`.
@@ -65,7 +65,7 @@ Download the binary and make it executable:
 
 ```bash
 curl -fL -o azminer \
-  https://github.com/azminer-app/azminer/releases/download/v1.2.8/azminer-v1.2.8-linux-x86_64
+  https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-linux-x86_64
 chmod +x azminer
 ```
 
@@ -126,7 +126,7 @@ azminer is **NVIDIA-only**. The current build targets SM **7.5, 8.6, 8.9 and 12.
 | Ada Lovelace | RTX 40xx | Supported |
 | Ampere | RTX 30xx | Supported |
 | Turing | RTX 20xx / GTX 16xx | Supported |
-| Pascal | GTX 10xx | Planned; unavailable in v1.2.8 |
+| Pascal | GTX 10xx | Planned; unavailable in v1.2.9 |
 
 Run `azminer -list` to check detected CUDA devices and route support.
 
@@ -142,24 +142,39 @@ Quantus hashrates for v1.2.5:
 | RTX 4090 | 1,359.14 MH/s |
 | RTX 5060 Ti | 407.34 MH/s |
 
-Pearl hashrates for v1.2.6:
+Pearl hashrates for v1.2.9:
 
 | GPU | Pearl |
 | --- | ---: |
-| RTX 3060 12GB | 52.098 TH/s |
-| RTX 3070 8GB | 80.299 TH/s |
-| RTX 3080 10GB | 123.269 TH/s |
-| RTX 3090 24GB | 134.481 TH/s |
-| RTX 4060 Ti 16GB | 94.640 TH/s |
-| RTX 4070 Ti SUPER 16GB | 176.692 TH/s |
-| RTX 4090 24GB | 327.571 TH/s |
-| RTX 5060 8GB | 79.321 TH/s |
-| RTX 5060 Ti 16GB | 93.306 TH/s |
-| RTX 5070 Ti 16GB | 195.083 TH/s |
-| RTX 5090 32GB | 408.034 TH/s |
+| RTX 3050 8GB | 36.47 TH/s |
+| RTX 3060 12GB | 51.09 TH/s |
+| RTX 3060 Ti 8GB | 71.89 TH/s |
+| RTX 3060 Laptop 12GB | 41.48 TH/s |
+| RTX 3070 8GB | 76.05 TH/s |
+| RTX 3070 Ti 8GB | 91.83 TH/s |
+| RTX 3080 10GB | 117.78 TH/s |
+| RTX 3080 Ti 12GB | 136.62 TH/s |
+| RTX 3090 24GB | 135.51 TH/s |
+| RTX 3090 Ti 24GB | 158.95 TH/s |
+| RTX 4060 8GB | 56.07 TH/s |
+| RTX 4060 Ti 8GB | 94.37 TH/s |
+| RTX 4060 Ti 16GB | 89.53 TH/s |
+| RTX 4070 12GB | 124.67 TH/s |
+| RTX 4070 Ti 12GB | 164.53 TH/s |
+| RTX 4070 Laptop 8GB | 66.52 TH/s |
+| RTX 4070 SUPER 12GB | 106.03 TH/s |
+| RTX 4070 Ti SUPER 16GB | 184.88 TH/s |
+| RTX 4080 16GB | 211.29 TH/s |
+| RTX 4080 SUPER 16GB | 162.96 TH/s |
+| RTX 4090 24GB | 302.50 TH/s |
+| RTX 4090D 48GB | 298.36 TH/s |
+| RTX 5060 8GB | 82.19 TH/s |
+| RTX 5060 Ti 8GB | 101.25 TH/s |
+| RTX 5060 Ti 16GB | 94.18 TH/s |
+| RTX 5070 12GB | 137.39 TH/s |
+| RTX 5070 Ti 16GB | 198.12 TH/s |
 
-v1.2.7 improves Pearl hashrate by roughly 1–3% on RTX 50xx (Blackwell); the table
-above shows v1.2.6 figures.
+v1.2.9 improves Pearl hashrate on RTX 30xx, 40xx and 50xx by roughly 0.4–6.6% over v1.2.8 (typically about 1%).
 
 Vearl hashrates for v1.2.8:
 
@@ -263,7 +278,7 @@ The API also answers `miner_getstat1` and `miner_getstat2` for compatible monito
 
 ## Rig integration
 
-Extract the [integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.8/azminer-v1.2.8.tar.gz) and follow its package README.
+Extract the [integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9.tar.gz) and follow its package README.
 
 Set the miner name to `azminer`, choose `pearl`, `quantus`, `parano1d` or `vearl`, and provide your pool endpoint and login. Optional extra arguments include `-g 0` or `-g all`.
 
