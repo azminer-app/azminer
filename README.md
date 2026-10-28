@@ -43,7 +43,7 @@ Two steps: get the miner for your system, then run the command for your coin. Ev
 #### Linux
 
 ```bash
-curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-linux-x86_64
+curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.2.10/azminer-v1.2.10-linux-x86_64
 chmod +x azminer
 ```
 
@@ -51,7 +51,7 @@ Needs an NVIDIA driver and GLIBC 2.28 or newer. Then run the command for your co
 
 #### Windows
 
-1. Download and extract the [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-windows-x86_64.zip) into a folder without spaces, such as `C:\\azminer`.
+1. Download and extract the [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.10/azminer-v1.2.10-windows-x86_64.zip) into a folder without spaces, such as `C:\azminer`.
 2. Open `start-vearl.bat` (or `start-pearl.bat`, `start-quantus.bat`, `start-parano1d.bat`) in Notepad, set `WALLET`, save, double-click.
 
 The Step 2 commands also work in Command Prompt with `azminer.exe` in place of `./azminer`. Needs Windows 10/11 and an NVIDIA driver.
@@ -63,7 +63,7 @@ Add a custom miner once, then one flight sheet per coin.
 | Field | Value |
 | --- | --- |
 | Miner name | `azminer` |
-| Installation URL | `https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9.tar.gz` |
+| Installation URL | `https://github.com/azminer-app/azminer/releases/download/v1.2.10/azminer-v1.2.10.tar.gz` |
 | Hash algorithm | `vearl`, `pearl`, `quantus` or `parano1d` |
 | Wallet and worker template | `%WAL%.%WORKER_NAME%` |
 | Pool URL | the pool from the coin's example in Step 2 |
@@ -122,13 +122,20 @@ Release announcements are posted in both communities and on https://azminer.app.
 
 ## Download
 
-Current version: **v1.2.9** · every file has a SHA-256 in [SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.2.9/SHA256SUMS). See [Releases](https://github.com/azminer-app/azminer/releases/latest) for every build and its changelog.
+Current version: **v1.2.10** · every file has a SHA-256 in [SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.2.10/SHA256SUMS). See [Releases](https://github.com/azminer-app/azminer/releases/latest) for every build and its changelog.
+
+New in v1.2.10:
+
+- Higher hashrate on NVIDIA Volta, Ampere, Ada and Blackwell GPUs.
+- Resolved compatibility issues for AMD GPUs on Windows.
+- Vearl sigma rate is now displayed correctly and reported in `/stats.json`.
+- Hashrate and share figures the miner reports now match the pool much more closely.
 
 | Platform | Download | Requirements |
 | --- | --- | --- |
-| **Windows x86_64** | [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-windows-x86_64.zip) | Windows 10/11 and an NVIDIA driver |
-| **Linux x86_64** | [Standalone binary](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-linux-x86_64) | GLIBC ≥ 2.28 and an NVIDIA driver |
-| **HiveOS / rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9.tar.gz) | Binary, integration scripts and setup instructions |
+| **Windows x86_64** | [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.10/azminer-v1.2.10-windows-x86_64.zip) | Windows 10/11 and an NVIDIA driver |
+| **Linux x86_64** | [Standalone binary](https://github.com/azminer-app/azminer/releases/download/v1.2.10/azminer-v1.2.10-linux-x86_64) | GLIBC ≥ 2.28 and an NVIDIA driver |
+| **HiveOS / rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.10/azminer-v1.2.10.tar.gz) | Binary, integration scripts and setup instructions |
 
 <details>
 <summary><strong>Verify a download</strong></summary>
@@ -142,12 +149,12 @@ sha256sum --ignore-missing -c SHA256SUMS
 
 ```powershell
 # Windows PowerShell
-Get-FileHash .\azminer-v1.2.9-windows-x86_64.zip -Algorithm SHA256
+Get-FileHash .\azminer-v1.2.10-windows-x86_64.zip -Algorithm SHA256
 ```
 
 ```bat
 :: Windows Command Prompt
-certutil -hashfile azminer-v1.2.9-windows-x86_64.zip SHA256
+certutil -hashfile azminer-v1.2.10-windows-x86_64.zip SHA256
 ```
 
 Compare the hash with the entry for that filename in `SHA256SUMS`. Download only from this repository or azminer.app.
@@ -156,7 +163,7 @@ Compare the hash with the entry for that filename in `SHA256SUMS`. Download only
 
 ## GPU support
 
-AZminer is **NVIDIA-only**. The build targets SM 7.5, 8.6, 8.9 and 12.0 for all coins; Vearl additionally runs on SM 6.0, 6.1, 7.0 and 8.0.
+AZminer is built for **NVIDIA** GPUs. v1.2.10 also resolves compatibility issues for AMD GPUs on Windows; see the release notes for the current AMD status. The CUDA build targets SM 7.5, 8.6, 8.9 and 12.0 for all coins; Vearl additionally runs on SM 6.0, 6.1, 7.0 and 8.0.
 
 | Architecture | GPU family | Status |
 | --- | --- | --- |
@@ -168,78 +175,12 @@ AZminer is **NVIDIA-only**. The build targets SM 7.5, 8.6, 8.9 and 12.0 for all 
 | Volta | Tesla V100 | Vearl only |
 | Pascal | GTX 10xx / Tesla P100 | Vearl only |
 
-A GPU that is not in the tables below is still supported if its architecture is listed here. Run `azminer -list` to see detected CUDA devices and route support.
+A GPU is supported if its architecture is listed here. Run `azminer -list` to see detected CUDA devices and route support.
 
 ## Performance
 
-Stock clocks, one source per version (the release notes). Actual results vary with driver, cooling and tuning. Have a GPU that is missing? Send it through a [Hashrate report](https://github.com/azminer-app/azminer/issues/new?template=hashrate-report.md).
+v1.2.10 raises hashrate on Volta, Ampere, Ada and Blackwell GPUs. Per-GPU tables are being re-measured for this version and will be published on [azminer.app](https://azminer.app/#benchmarks) and in the release notes. Actual results vary with driver, cooling and tuning. Measured a GPU on v1.2.10? Send it through a [Hashrate report](https://github.com/azminer-app/azminer/issues/new?template=hashrate-report.md).
 
-<details open>
-<summary><strong>Pearl · v1.2.9</strong></summary>
-
-| GPU | Pearl |
-| --- | ---: |
-| RTX 3050 8GB | 36.47 TH/s |
-| RTX 3060 12GB | 51.09 TH/s |
-| RTX 3060 Ti 8GB | 71.89 TH/s |
-| RTX 3060 Laptop 12GB | 41.48 TH/s |
-| RTX 3070 8GB | 76.05 TH/s |
-| RTX 3070 Ti 8GB | 91.83 TH/s |
-| RTX 3080 10GB | 117.78 TH/s |
-| RTX 3080 Ti 12GB | 136.62 TH/s |
-| RTX 3090 24GB | 135.51 TH/s |
-| RTX 3090 Ti 24GB | 158.95 TH/s |
-| RTX 4060 8GB | 56.07 TH/s |
-| RTX 4060 Ti 8GB | 94.37 TH/s |
-| RTX 4060 Ti 16GB | 89.53 TH/s |
-| RTX 4070 12GB | 124.67 TH/s |
-| RTX 4070 Ti 12GB | 164.53 TH/s |
-| RTX 4070 Laptop 8GB | 66.52 TH/s |
-| RTX 4070 SUPER 12GB | 106.03 TH/s |
-| RTX 4070 Ti SUPER 16GB | 184.88 TH/s |
-| RTX 4080 16GB | 211.29 TH/s |
-| RTX 4080 SUPER 16GB | 162.96 TH/s |
-| RTX 4090 24GB | 302.50 TH/s |
-| RTX 4090D 48GB | 298.36 TH/s |
-| RTX 5060 8GB | 82.19 TH/s |
-| RTX 5060 Ti 8GB | 101.25 TH/s |
-| RTX 5060 Ti 16GB | 94.18 TH/s |
-| RTX 5070 12GB | 137.39 TH/s |
-| RTX 5070 Ti 16GB | 198.12 TH/s |
-
-</details>
-
-<details>
-<summary><strong>Vearl · v1.2.9</strong></summary>
-
-| GPU | SM | Vearl | Power | Core / Mem |
-| --- | ---: | ---: | ---: | --- |
-| Tesla P100 PCIe 16GB | 60 | 3.61 MH/s | 142.7 W | 1328 / 715 MHz |
-| GTX 1080 | 61 | 6.49 MH/s | 130.0 W | 1794 / 4513 MHz |
-| Tesla V100 SXM2 32GB | 70 | 29.04 MH/s | 196.6 W | 1330 / 877 MHz |
-| RTX 2060 | 75 | 75.99 MH/s | 127.3 W | 1498 / 6801 MHz |
-| A100 PCIe 40GB | 80 | 274.92 MH/s | 248.8 W | 1166 / 1215 MHz |
-| RTX 3060 | 86 | 86.62 MH/s | 127.2 W | 1518 / 7508 MHz |
-| RTX 3090 | 86 | 126.68 MH/s | 219.8 W | 704 / 9501 MHz |
-| RTX 4060 | 89 | 120.64 MH/s | 114.0 W | 2491 / 8251 MHz |
-| RTX 4090 | 89 | 368.94 MH/s | 298.9 W | 2392 / 10251 MHz |
-| RTX 5060 | 120 | 128.60 MH/s | 145.0 W | 2661 / 13801 MHz |
-| RTX 5090 | 120 | 376.74 MH/s | 499.9 W | 2852 / 13801 MHz |
-
-</details>
-
-<details>
-<summary><strong>Quantus · v1.2.5 (unchanged since)</strong></summary>
-
-| GPU | Quantus |
-| --- | ---: |
-| RTX 3080 | 543.89 MH/s |
-| RTX 3090 | 608.61 MH/s |
-| RTX 4060 | 275.23 MH/s |
-| RTX 4090 | 1,359.14 MH/s |
-| RTX 5060 Ti | 407.34 MH/s |
-
-</details>
 
 ## Options
 
@@ -295,7 +236,7 @@ curl -s http://127.0.0.1:3333/getstat      # getstat1 format
 curl -s http://127.0.0.1:3333/stats.json   # readable JSON
 ```
 
-The API also answers `miner_getstat1` and `miner_getstat2`. In the HiveOS bundle the port is `CUSTOM_API_PORT` in `h-manifest.conf`, default `4068`, and `h-stats.sh` reports hashrate, temperature, fan, shares and bus numbers.
+The API also answers `miner_getstat1` and `miner_getstat2`. For Vearl, `/stats.json` also reports the sigma rate per GPU (`sigma_per_s`) and in total (`total_sigma_per_s`). In the HiveOS bundle the port is `CUSTOM_API_PORT` in `h-manifest.conf`, default `4068`, and `h-stats.sh` reports hashrate, temperature, fan, shares and bus numbers.
 
 ## Troubleshooting
 
