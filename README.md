@@ -1,124 +1,162 @@
 <div align="center">
 
-<img src=".github/assets/azminer-header.png" alt="azminer — Native GPU mining for Pearl, Quantus, Parano1d and Vearl" width="1200">
+<img src=".github/assets/azminer-header.png" alt="AZminer — Native GPU mining for Pearl, Quantus, Parano1d and Vearl" width="1200">
 
-[![Release](https://img.shields.io/github/v/release/azminer-app/azminer?label=release&color=2563eb)](https://github.com/azminer-app/azminer/releases/latest) [![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-334155)](#download) [![Dev fee](https://img.shields.io/badge/dev%20fee-2%25-f59e0b)](#supported-coins)
+[![Release](https://img.shields.io/github/v/release/azminer-app/azminer?label=release&color=F2A65A&labelColor=0F1011&logo=github&logoColor=white)](https://github.com/azminer-app/azminer/releases/latest)
+[![Website](https://img.shields.io/badge/website-azminer.app-F2A65A?labelColor=0F1011&logo=cloudflare&logoColor=white)](https://azminer.app)
+[![Telegram](https://img.shields.io/badge/Telegram-join-F2A65A?labelColor=0F1011&logo=telegram&logoColor=white)](https://t.me/+DYOBpOCui9EzNDM1)
+[![Discord](https://img.shields.io/badge/Discord-join-F2A65A?labelColor=0F1011&logo=discord&logoColor=white)](https://discord.gg/uzDmVnyups)
 
-[Download](#download) · [Quick start](#quick-start) · [GPU support](#gpu-support) · [Performance](#performance) · [Options](#options) · [API](#monitoring-api)
+[Coins](#supported-coins) · [Quick start](#quick-start) · [Support](#support) · [Download](#download) · [GPU support](#gpu-support) · [Performance](#performance) · [Options](#options) · [Dev fee](#dev-fee)
 
 </div>
 
-azminer is a self-contained executable with pool failover, per-GPU tuning, temperature protection, a stall watchdog and a monitoring API. An NVIDIA driver is required.
+AZminer is a native NVIDIA GPU miner for new proof-of-work coins. One self-contained binary for Windows and Linux, a HiveOS integration bundle, pool failover, per-GPU tuning, temperature protection, a stall watchdog and a monitoring API.
+
+## Supported coins
+
+| Coin | Algorithm | Select with | Pool in the examples below | Guide |
+| --- | --- | --- | --- | --- |
+| **Vearl** (new) | `vearl` (vpool/2 pools) | `-a vearl` | `pool.vearl.org:3333` | [azminer.app/vearl](https://azminer.app/vearl) |
+| **Pearl (PRL)** | `pearlhash` | `-a pearl` | `prl.kryptex.network:7048` | [azminer.app/pearl](https://azminer.app/pearl) |
+| **Quantus** | `qpow-poseidon2` | `-a quantus` | `qtc.kryptex.network:7049` | [azminer.app/quantus](https://azminer.app/quantus) |
+| **Parano1d** | `parano1d` | `-a parano1d` | `stratum+ssl://stratum.innovlab.cc:19601` | [azminer.app/parano1d](https://azminer.app/parano1d) |
+
+Hashrates are not comparable across coins (each algorithm has its own unit). Compare cards within one coin, and use a pool's calculator for earnings.
+
+## Quick start
+
+Two steps: get the miner for your system, then run the command for your coin. Every command is complete; replace `YOUR_WALLET` with your address for that coin. `rig1` is the worker name shown on the pool; change it per machine.
+
+<details>
+<summary><strong>New to mining? Four words you need</strong></summary>
+
+- **Wallet**: the address that receives the coins. Create it in the coin's official wallet, then paste it after `-u`. Never share its seed phrase; AZminer never asks for it.
+- **Pool**: a server that combines many miners and pays each by work done. The examples already include one; any pool for the coin works, and each pool charges its own fee.
+- **Hashrate**: how fast your GPU works, in H/s. Higher is more coins. Units differ per coin, so compare within one coin only.
+- **Accepted share**: a unit of work the pool confirmed. When the log shows accepted shares, you are mining.
+
+</details>
+
+### Step 1 · Get the miner
+
+#### Linux
+
+```bash
+curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-linux-x86_64
+chmod +x azminer
+```
+
+Needs an NVIDIA driver and GLIBC 2.28 or newer. Then run the command for your coin from Step 2.
+
+#### Windows
+
+1. Download and extract the [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-windows-x86_64.zip) into a folder without spaces, such as `C:\\azminer`.
+2. Open `start-vearl.bat` (or `start-pearl.bat`, `start-quantus.bat`, `start-parano1d.bat`) in Notepad, set `WALLET`, save, double-click.
+
+The Step 2 commands also work in Command Prompt with `azminer.exe` in place of `./azminer`. Needs Windows 10/11 and an NVIDIA driver.
+
+#### HiveOS
+
+Add a custom miner once, then one flight sheet per coin.
+
+| Field | Value |
+| --- | --- |
+| Miner name | `azminer` |
+| Installation URL | `https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9.tar.gz` |
+| Hash algorithm | `vearl`, `pearl`, `quantus` or `parano1d` |
+| Wallet and worker template | `%WAL%.%WORKER_NAME%` |
+| Pool URL | the pool from the coin's example in Step 2 |
+
+### Step 2 · Pick your coin and run
+
+<details open>
+<summary><strong>Vearl</strong> · new · pool.vearl.org:3333</summary>
+
+```bash
+./azminer -a vearl -o pool.vearl.org:3333 -u YOUR_WALLET.rig1
+```
+
+Vearl addresses start with `vrl1`. Official pool, 1% fee; `pool.vearl.org:3366` is its solo port.
+
+</details>
+
+<details>
+<summary><strong>Pearl (PRL)</strong> · prl.kryptex.network:7048</summary>
+
+```bash
+./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1
+```
+
+</details>
+
+<details>
+<summary><strong>Quantus</strong> · qtc.kryptex.network:7049</summary>
+
+```bash
+./azminer -a quantus -o qtc.kryptex.network:7049 -u YOUR_WALLET.rig1
+```
+
+</details>
+
+<details>
+<summary><strong>Parano1d</strong> · stratum.innovlab.cc:19601 (TLS)</summary>
+
+```bash
+./azminer -a parano1d -o stratum+ssl://stratum.innovlab.cc:19601 -u YOUR_WALLET.rig1
+```
+
+Parano1d addresses start with `o1`. Parano1d pools use TLS, so keep the `stratum+ssl://` prefix.
+
+</details>
+
+**You are mining when the log shows accepted shares**, usually within two minutes. Nothing after five minutes? Ask in [Telegram](https://t.me/+DYOBpOCui9EzNDM1) with your GPU, driver version and the last 20 log lines.
+
+## Support
+
+- **Telegram** for quick questions and release news: https://t.me/+DYOBpOCui9EzNDM1
+- **Discord** for overclock settings and GPU-by-GPU channels: https://discord.gg/uzDmVnyups
+- **GitHub Issues** for bugs: include the azminer version, OS, driver version, GPU, selected coin and the log.
+
+Release announcements are posted in both communities and on https://azminer.app.
 
 ## Download
 
-Packages below are for **v1.2.9**. See [Releases](https://github.com/azminer-app/azminer/releases/latest) for the current version.
+Current version: **v1.2.9** · every file has a SHA-256 in [SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.2.9/SHA256SUMS). See [Releases](https://github.com/azminer-app/azminer/releases/latest) for every build and its changelog.
 
 | Platform | Download | Requirements |
 | --- | --- | --- |
 | **Windows x86_64** | [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-windows-x86_64.zip) | Windows 10/11 and an NVIDIA driver |
 | **Linux x86_64** | [Standalone binary](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-linux-x86_64) | GLIBC ≥ 2.28 and an NVIDIA driver |
-| **Rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9.tar.gz) | Binary, integration scripts and setup instructions |
-
-[SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.2.9/SHA256SUMS) is available for download verification.
+| **HiveOS / rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9.tar.gz) | Binary, integration scripts and setup instructions |
 
 <details>
 <summary><strong>Verify a download</strong></summary>
 
-Download `SHA256SUMS` from the same release as your package. Keep the package's original filename.
-
-**Linux**
+Download `SHA256SUMS` from the same release. Keep the package's original filename.
 
 ```bash
+# Linux
 sha256sum --ignore-missing -c SHA256SUMS
 ```
 
-**Windows PowerShell**
-
 ```powershell
+# Windows PowerShell
 Get-FileHash .\azminer-v1.2.9-windows-x86_64.zip -Algorithm SHA256
 ```
 
-Compare the returned hash with the entry for that filename in `SHA256SUMS`.
+```bat
+:: Windows Command Prompt
+certutil -hashfile azminer-v1.2.9-windows-x86_64.zip SHA256
+```
+
+Compare the hash with the entry for that filename in `SHA256SUMS`. Download only from this repository or azminer.app.
 
 </details>
 
-## Quick start
-
-Replace `POOL_HOST:PORT` with your pool's endpoint and the wallet placeholder with your payout address for the selected coin. The examples use `.rig1` as the worker name; follow your pool's login format.
-
-### Windows
-
-1. Extract the ZIP package.
-2. Open `start-pearl.bat`, `start-quantus.bat`, `start-parano1d.bat` or `start-vearl.bat` in a text editor.
-3. Set `WALLET` (and `POOL` for Vearl), save the file and double-click the launcher.
-
-For example, in `start-pearl.bat`:
-
-```bat
-set "WALLET=YOUR_PEARL_WALLET"
-```
-
-### Linux
-
-Download the binary and make it executable:
-
-```bash
-curl -fL -o azminer \
-  https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9-linux-x86_64
-chmod +x azminer
-```
-
-Then run **one** of the following commands.
-
-**Pearl**
-
-```bash
-./azminer -a pearl \
-  -o stratum+tcp://POOL_HOST:PORT \
-  -u YOUR_PEARL_WALLET.rig1
-```
-
-**Quantus**
-
-```bash
-./azminer -a quantus \
-  -o stratum+tcp://POOL_HOST:PORT \
-  -u YOUR_QUANTUS_WALLET.rig1
-```
-
-**Parano1d**
-
-```bash
-./azminer -a parano1d \
-  -o stratum+ssl://POOL_HOST:PORT \
-  -u YOUR_PARANO1D_WALLET.rig1
-```
-
-**Vearl**
-
-```bash
-./azminer -a vearl \
-  -o stratum+tcp://POOL_HOST:PORT \
-  -u YOUR_VEARL_WALLET.rig1
-```
-
-The same mining arguments work on Windows with `azminer.exe`. If the pool URL has no scheme, azminer defaults to `stratum+tcp://`. Parano1d pools are typically TLS, so use the `stratum+ssl://` scheme. Vearl pools use the `vpool/2` protocol; pass the pool as `host:port` (or `stratum+ssl://host:port` if your pool requires TLS).
-
-## Supported coins
-
-| Coin | Algorithm | Selection | Dev fee |
-| --- | --- | --- | ---: |
-| **Pearl (PRL)** | `pearlhash` | `-a pearl` | 2% |
-| **Quantus** | `qpow-poseidon2` | `-a quantus` | 2% |
-| **Parano1d** | `parano1d` | `-a parano1d` | 2% |
-| **Vearl** | `vearl` (`vpool/2` pools) | `-a vearl` | 2% |
-
-The fee is collected through short, periodic mining intervals using the developer wallet. **Published hashrates already account for the miner fee.** Pool fees are separate.
-
 ## GPU support
 
-azminer is **NVIDIA-only**. The current build targets SM **7.5, 8.6, 8.9 and 12.0** for all coins. Vearl additionally runs on SM **6.0, 6.1, 7.0 and 8.0**.
+AZminer is **NVIDIA-only**. The build targets SM 7.5, 8.6, 8.9 and 12.0 for all coins; Vearl additionally runs on SM 6.0, 6.1, 7.0 and 8.0.
 
 | Architecture | GPU family | Status |
 | --- | --- | --- |
@@ -128,23 +166,16 @@ azminer is **NVIDIA-only**. The current build targets SM **7.5, 8.6, 8.9 and 12.
 | Ampere (data center) | A100 | Vearl only |
 | Turing | RTX 20xx / GTX 16xx | Supported |
 | Volta | Tesla V100 | Vearl only |
-| Pascal | GTX 10xx / Tesla P100 | Vearl only; other coins planned |
+| Pascal | GTX 10xx / Tesla P100 | Vearl only |
 
-Run `azminer -list` to check detected CUDA devices and route support.
+A GPU that is not in the tables below is still supported if its architecture is listed here. Run `azminer -list` to see detected CUDA devices and route support.
 
 ## Performance
 
-Quantus hashrates for v1.2.5:
+Stock clocks, one source per version (the release notes). Actual results vary with driver, cooling and tuning. Have a GPU that is missing? Send it through a [Hashrate report](https://github.com/azminer-app/azminer/issues/new?template=hashrate-report.md).
 
-| GPU | Quantus |
-| --- | ---: |
-| RTX 3080 | 543.89 MH/s |
-| RTX 3090 | 608.61 MH/s |
-| RTX 4060 | 275.23 MH/s |
-| RTX 4090 | 1,359.14 MH/s |
-| RTX 5060 Ti | 407.34 MH/s |
-
-Pearl hashrates for v1.2.9:
+<details open>
+<summary><strong>Pearl · v1.2.9</strong></summary>
 
 | GPU | Pearl |
 | --- | ---: |
@@ -176,43 +207,39 @@ Pearl hashrates for v1.2.9:
 | RTX 5070 12GB | 137.39 TH/s |
 | RTX 5070 Ti 16GB | 198.12 TH/s |
 
-v1.2.9 improves Pearl hashrate on RTX 30xx, 40xx and 50xx by roughly 0.4–6.6% over v1.2.8 (typically about 1%).
+</details>
 
-Vearl hashrates for v1.2.9:
+<details>
+<summary><strong>Vearl · v1.2.9</strong></summary>
 
-| GPU | Vearl | Power | Core / Mem |
-| --- | ---: | ---: | --- |
-| Tesla P100 PCIe 16GB | 3.61 MH/s | 142.7 W | 1328 / 715 MHz |
-| GTX 1080 | 6.49 MH/s | 130.0 W | 1794 / 4513 MHz |
-| Tesla V100 SXM2 32GB | 29.04 MH/s | 196.6 W | 1330 / 877 MHz |
-| RTX 2060 | 75.99 MH/s | 127.3 W | 1498 / 6801 MHz |
-| A100 PCIe 40GB | 274.92 MH/s | 248.8 W | 1166 / 1215 MHz |
-| RTX 3060 | 86.62 MH/s | 127.2 W | 1518 / 7508 MHz |
-| RTX 3090 | 126.68 MH/s | 219.8 W | 704 / 9501 MHz |
-| RTX 4060 | 120.64 MH/s | 114.0 W | 2491 / 8251 MHz |
-| RTX 4090 | 368.94 MH/s | 298.9 W | 2392 / 10251 MHz |
-| RTX 5060 | 128.60 MH/s | 145.0 W | 2661 / 13801 MHz |
-| RTX 5090 | 376.74 MH/s | 499.9 W | 2852 / 13801 MHz |
+| GPU | SM | Vearl | Power | Core / Mem |
+| --- | ---: | ---: | ---: | --- |
+| Tesla P100 PCIe 16GB | 60 | 3.61 MH/s | 142.7 W | 1328 / 715 MHz |
+| GTX 1080 | 61 | 6.49 MH/s | 130.0 W | 1794 / 4513 MHz |
+| Tesla V100 SXM2 32GB | 70 | 29.04 MH/s | 196.6 W | 1330 / 877 MHz |
+| RTX 2060 | 75 | 75.99 MH/s | 127.3 W | 1498 / 6801 MHz |
+| A100 PCIe 40GB | 80 | 274.92 MH/s | 248.8 W | 1166 / 1215 MHz |
+| RTX 3060 | 86 | 86.62 MH/s | 127.2 W | 1518 / 7508 MHz |
+| RTX 3090 | 86 | 126.68 MH/s | 219.8 W | 704 / 9501 MHz |
+| RTX 4060 | 89 | 120.64 MH/s | 114.0 W | 2491 / 8251 MHz |
+| RTX 4090 | 89 | 368.94 MH/s | 298.9 W | 2392 / 10251 MHz |
+| RTX 5060 | 120 | 128.60 MH/s | 145.0 W | 2661 / 13801 MHz |
+| RTX 5090 | 120 | 376.74 MH/s | 499.9 W | 2852 / 13801 MHz |
 
-Hashrates include the 2% miner dev fee. The tables list the GPUs measured so far; a GPU that is not listed is still supported if its architecture appears under [GPU support](#gpu-support).
+</details>
 
-The following GPUs are also supported. Their v1.2.5 hashrates will be added in a future update:
+<details>
+<summary><strong>Quantus · v1.2.5 (unchanged since)</strong></summary>
 
-- RTX 4070 Ti
-- RTX 4070 SUPER
-- RTX 5070 Ti
-- RTX 4060 Ti
-- RTX 3070
-- RTX 3060 Ti
-- RTX 2070 SUPER
-- RTX 2060
-- RTX 3060
-- RTX 3060 Laptop
-- RTX 5060 Laptop
-- GTX 1660 Ti
-- GTX 1660 SUPER
+| GPU | Quantus |
+| --- | ---: |
+| RTX 3080 | 543.89 MH/s |
+| RTX 3090 | 608.61 MH/s |
+| RTX 4060 | 275.23 MH/s |
+| RTX 4090 | 1,359.14 MH/s |
+| RTX 5060 Ti | 407.34 MH/s |
 
-Actual performance varies with the GPU model, driver, cooling and tuning. See [GPU support](#gpu-support) for compatible families.
+</details>
 
 ## Options
 
@@ -221,29 +248,23 @@ Run `azminer --help` for the complete reference. Long options accept both `-long
 | Option | Purpose |
 | --- | --- |
 | `-a`, `-algo` | Select `pearl`, `quantus`, `parano1d` or `vearl` |
-| `-o`, `-pool` | Set the primary pool endpoint |
-| `-u`, `-wal` | Set the pool login / wallet |
-| `-worker` | Append a worker name |
-| `-p`, `-pass` | Set the pool password; default `x` |
-| `-g`, `-gpus` | Select GPUs, e.g. `0,1`; default `all` |
-| `-config` | Load a JSON configuration file; CLI flags override file settings |
+| `-o`, `-pool` | Primary pool endpoint |
+| `-u`, `-wal` | Pool login / wallet |
+| `-worker` | Worker name |
+| `-p`, `-pass` | Pool password; default `x` |
+| `-g`, `-gpus` | GPUs to use, e.g. `0,1`; default `all` |
+| `-config` | Load a JSON configuration file; CLI flags override it |
 
 ### Pool failover
 
-Configure a secondary pool and its credentials:
-
 ```bash
 ./azminer -a pearl \
-  -o PRIMARY_POOL_HOST:PORT -u YOUR_PEARL_WALLET.rig1 -p x \
-  -pool2 BACKUP_POOL_HOST:PORT -wal2 YOUR_PEARL_WALLET.rig1 -pass2 x
+  -o PRIMARY_POOL_HOST:PORT -u YOUR_WALLET.rig1 -p x \
+  -pool2 BACKUP_POOL_HOST:PORT -wal2 YOUR_WALLET.rig1 -pass2 x
 ```
-
-Replace both endpoints with actual pool addresses.
 
 <details>
 <summary><strong>Advanced controls and diagnostics</strong></summary>
-
-Check `--help` for accepted units, per-GPU syntax and values.
 
 | Control | Options |
 | --- | --- |
@@ -251,59 +272,50 @@ Check `--help` for accepted units, per-GPU syntax and values.
 | Power limit | `-powlim` |
 | Fan control / temperature target | `-tt` |
 | Fan bounds / temperature cap | `-fanmin`, `-fanmax`, `-tmax` |
-| Thermal pause / resume | `-tstop`, `-tstart` — thresholds in °C |
-| GPU duty-cycle cap | `-gpow` — 1 to 100 |
+| Thermal pause / resume | `-tstop`, `-tstart` (°C) |
+| GPU duty-cycle cap | `-gpow` (1–100) |
 | Reconnect / failover policy | `-fret`, `-ftimeout`, `-retrydelay` |
 | Watchdog / restart policy | `-wdog`, `-wdtimeout`, `-rmode` |
 | Timed operation / pause windows | `-timeout`, `-pauseat`, `-resumeat` |
-| File logging / size bounds | `-log`, `-logfile`, `-logdir`, `-logsmaxsize` |
-| List devices | `-list` |
-| List compiled algorithms | `--list-coins` |
-| Authenticate compiled kernels and exit | `--integrity-selftest` |
+| File logging | `-log`, `-logfile`, `-logdir`, `-logsmaxsize` |
+| List devices / compiled algorithms | `-list`, `--list-coins` |
+| Verify compiled kernels and exit | `--integrity-selftest` |
 | Print version | `-V`, `--version` |
 
-GPU tuning uses NVML. Terminal logs use color when appropriate and switch to plain output when piped.
+GPU tuning uses NVML. Logs use color in a terminal and plain text when piped.
 
 </details>
 
 ## Monitoring API
 
-The standalone API defaults to **`127.0.0.1:3333`**. Use `-cdmport` to set a port or address; accepted forms are `0`, `port` and `IP:port`.
+The standalone API listens on `127.0.0.1:3333` by default. Use `-cdmport` to change it (`0`, `port` or `IP:port`).
 
 ```bash
-# getstat1 statistics
-curl -s http://127.0.0.1:3333/getstat
-
-# Readable JSON statistics
-curl -s http://127.0.0.1:3333/stats.json
+curl -s http://127.0.0.1:3333/getstat      # getstat1 format
+curl -s http://127.0.0.1:3333/stats.json   # readable JSON
 ```
 
-The API also answers `miner_getstat1` and `miner_getstat2` for compatible monitoring integrations.
-
-## Rig integration
-
-Extract the [integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.9/azminer-v1.2.9.tar.gz) and follow its package README.
-
-Set the miner name to `azminer`, choose `pearl`, `quantus`, `parano1d` or `vearl`, and provide your pool endpoint and login. Optional extra arguments include `-g 0` or `-g all`.
-
-The `h-stats.sh` script reports hashrate, temperature, fan, shares and bus numbers. Its API port is set by `CUSTOM_API_PORT` in `h-manifest.conf`, with a default of **4068**.
-
+The API also answers `miner_getstat1` and `miner_getstat2`. In the HiveOS bundle the port is `CUSTOM_API_PORT` in `h-manifest.conf`, default `4068`, and `h-stats.sh` reports hashrate, temperature, fan, shares and bus numbers.
 
 ## Troubleshooting
 
 | Issue | Check |
 | --- | --- |
-| Linux permission error | Make the binary executable with `chmod +x` |
+| Linux permission error | `chmod +x azminer` |
 | Missing GLIBC version | Use GLIBC 2.28 or newer |
-| Missing GPU | Run `-list`; check the driver and supported architecture |
-| Pool connection / authorization error | Check the endpoint, transport, coin, wallet, worker format and password |
-| API / rig statistics unavailable | Check the API address; standalone uses port 3333, the integration bundle uses 4068 |
-| Unexpected hashrate | Check the selected coin, GPU, driver, clocks, power limit and temperature |
+| No GPU found | Run `-list`; check the driver and that the architecture is supported |
+| Pool connection or authorization error | Endpoint, transport (`stratum+tcp` vs `stratum+ssl`), coin, wallet, worker format, password |
+| API or rig statistics unavailable | Standalone uses port 3333, the HiveOS bundle 4068 |
+| Unexpected hashrate | Selected coin, GPU, driver, clocks, power limit, temperature |
 
-## Support
+## About
 
-[Open an issue](https://github.com/azminer-app/azminer/issues) for bug reports or feature requests. Include the azminer version, operating system, driver version, GPU model, selected coin and relevant logs.
+AZminer is built and maintained by the AZminer team. Binaries are published only on this repository's Releases page and on azminer.app; every release ships with `SHA256SUMS`.
+
+## Dev fee
+
+AZminer charges a 2% dev fee on every coin. It is collected through short, periodic mining intervals on the developer wallet, and every hashrate published here already includes it. Pool fees are separate and set by the pool.
 
 ## License
 
-azminer is proprietary software; all rights reserved. Third-party components retain their own licenses. See the license notice included with each release package.
+AZminer is proprietary software; all rights reserved. Third-party components retain their own licenses. See the license notice included with each release package.
