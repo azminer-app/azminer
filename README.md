@@ -43,7 +43,7 @@ Two steps: get the miner for your system, then run the command for your coin. Ev
 #### Linux
 
 ```bash
-curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.2.11/azminer-v1.2.11-linux-x86_64
+curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-linux-x86_64
 chmod +x azminer
 ```
 
@@ -51,7 +51,7 @@ Needs an NVIDIA driver and GLIBC 2.28 or newer. Then run the command for your co
 
 #### Windows
 
-1. Download and extract the [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.11/azminer-v1.2.11-windows-x86_64.zip) into a folder without spaces, such as `C:\azminer`.
+1. Download and extract the [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-windows-x86_64.zip) into a folder without spaces, such as `C:\azminer`.
 2. Open `start-vearl.bat` (or `start-pearl.bat`, `start-quantus.bat`, `start-parano1d.bat`) in Notepad, set `WALLET`, save, double-click.
 
 The Step 2 commands also work in Command Prompt with `azminer.exe` in place of `./azminer`. Needs Windows 10/11 and an NVIDIA driver.
@@ -63,7 +63,7 @@ Add a custom miner once, then one flight sheet per coin.
 | Field | Value |
 | --- | --- |
 | Miner name | `azminer` |
-| Installation URL | `https://github.com/azminer-app/azminer/releases/download/v1.2.11/azminer-v1.2.11.tar.gz` |
+| Installation URL | `https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0.tar.gz` |
 | Hash algorithm | `vearl`, `pearl`, `quantus` or `parano1d` |
 | Wallet and worker template | `%WAL%.%WORKER_NAME%` |
 | Pool URL | the pool from the coin's example in Step 2 |
@@ -122,21 +122,21 @@ Release announcements are posted in both communities and on https://azminer.app.
 
 ## Download
 
-Current version: **v1.2.11** · every file has a SHA-256 in [SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.2.11/SHA256SUMS). See [Releases](https://github.com/azminer-app/azminer/releases/latest) for every build and its changelog.
+Current version: **v1.3.0** · every file has a SHA-256 in [SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.3.0/SHA256SUMS). See [Releases](https://github.com/azminer-app/azminer/releases/latest) for every build and its changelog.
 
-New in v1.2.11:
+New in v1.3.0:
 
-- Pearl and Quantus hashrate up 1–5% over v1.2.10, depending on the GPU.
-- Better power efficiency (more hashes per watt) on Pearl and Quantus.
-- Parano1d and Vearl unchanged.
+- Memory-clock lock: `-mclock-lock 405` or `-mclock-lock 810`, per GPU with `-g 0,1 -mclock-lock 405,810`. Core-clock lock `-cclock-lock` added too.
+- NVIDIA CMP cards (40HX/50HX/70HX/90HX/170HX) supported on Linux/HiveOS, including the 405/810 MHz memory lock. See `--cmp-unlock` in the release notes.
+- Pearl and Quantus: a further small hashrate gain and better efficiency.
 
-v1.2.10 added higher hashrate on Volta, Ampere, Ada and Blackwell GPUs, AMD compatibility fixes on Windows, correct Vearl sigma reporting and miner-side figures that match the pool.
+v1.2.11 raised Pearl and Quantus hashrate 1–5% with better power efficiency; v1.2.10 added gains on Volta, Ampere, Ada and Blackwell GPUs, AMD compatibility fixes on Windows, correct Vearl sigma reporting and miner-side figures that match the pool.
 
 | Platform | Download | Requirements |
 | --- | --- | --- |
-| **Windows x86_64** | [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.2.11/azminer-v1.2.11-windows-x86_64.zip) | Windows 10/11 and an NVIDIA driver |
-| **Linux x86_64** | [Standalone binary](https://github.com/azminer-app/azminer/releases/download/v1.2.11/azminer-v1.2.11-linux-x86_64) | GLIBC ≥ 2.28 and an NVIDIA driver |
-| **HiveOS / rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.2.11/azminer-v1.2.11.tar.gz) | Binary, integration scripts and setup instructions |
+| **Windows x86_64** | [ZIP package](https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-windows-x86_64.zip) | Windows 10/11 and an NVIDIA driver |
+| **Linux x86_64** | [Standalone binary](https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-linux-x86_64) | GLIBC ≥ 2.28 and an NVIDIA driver |
+| **HiveOS / rig integration** | [Integration bundle](https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0.tar.gz) | Binary, integration scripts and setup instructions |
 
 <details>
 <summary><strong>Verify a download</strong></summary>
@@ -150,12 +150,12 @@ sha256sum --ignore-missing -c SHA256SUMS
 
 ```powershell
 # Windows PowerShell
-Get-FileHash .\azminer-v1.2.11-windows-x86_64.zip -Algorithm SHA256
+Get-FileHash .\azminer-v1.3.0-windows-x86_64.zip -Algorithm SHA256
 ```
 
 ```bat
 :: Windows Command Prompt
-certutil -hashfile azminer-v1.2.11-windows-x86_64.zip SHA256
+certutil -hashfile azminer-v1.3.0-windows-x86_64.zip SHA256
 ```
 
 Compare the hash with the entry for that filename in `SHA256SUMS`. Download only from this repository or azminer.app.
@@ -180,7 +180,7 @@ A GPU is supported if its architecture is listed here. Run `azminer -list` to se
 
 ## Performance
 
-v1.2.11 raises Pearl and Quantus hashrate by 1–5% with better power efficiency, on top of the v1.2.10 gains on Volta, Ampere, Ada and Blackwell GPUs. Per-GPU tables are being re-measured for this version and will be published on [azminer.app](https://azminer.app/#benchmarks) and in the release notes. Actual results vary with driver, cooling and tuning. Measured a GPU on v1.2.11? Send it through a [Hashrate report](https://github.com/azminer-app/azminer/issues/new?template=hashrate-report.md).
+v1.3.0 adds a further small Pearl and Quantus hashrate gain with better efficiency, on top of the 1–5% from v1.2.11 and the v1.2.10 gains on Volta, Ampere, Ada and Blackwell GPUs. Per-GPU tables are being re-measured for this version and will be published on [azminer.app](https://azminer.app/#benchmarks) and in the release notes. Actual results vary with driver, cooling and tuning. Measured a GPU on v1.3.0? Send it through a [Hashrate report](https://github.com/azminer-app/azminer/issues/new?template=hashrate-report.md).
 
 
 ## Options
@@ -211,6 +211,8 @@ Run `azminer --help` for the complete reference. Long options accept both `-long
 | Control | Options |
 | --- | --- |
 | Core / memory offsets | `-cclock`, `-mclock` |
+| Core / memory clock lock (absolute MHz, per GPU) | `-cclock-lock`, `-mclock-lock` (e.g. `-mclock-lock 405,810`) |
+| CMP driver unlock (Linux, root) | `--cmp-unlock`, `--cmp-reunlock`, `--cmp-status`, `--cmp-rollback` |
 | Power limit | `-powlim` |
 | Fan control / temperature target | `-tt` |
 | Fan bounds / temperature cap | `-fanmin`, `-fanmax`, `-tmax` |
