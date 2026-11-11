@@ -161,12 +161,12 @@ Only the three lines under `EDIT HERE` need changing:
 | `WORKER` | Name shown on the pool. Default: the PC name | `set "WORKER=rig1"` |
 | `EXTRA` | Any [options](#options), space-separated | `set "EXTRA=-lcc 1500 -lmc 810"` |
 
-Example: worker `rig1`, mining only on GPU 0 and 1, core locked at 1500 MHz and memory at 810 MHz:
+Example: worker `rig1`, mining on GPU 0 to 3, each card with its own core lock and every card with memory at 810 MHz:
 
 ```bat
 set "WALLET=YOUR_ADDRESS"
 set "WORKER=rig1"
-set "EXTRA=-g 0,1 -lcc 1500 -lmc 810"
+set "EXTRA=-g 0,1,2,3 -lcc 1500,1500,1450,1400 -lmc 810"
 ```
 
 Clock, power and fan options need Administrator: right-click `start-pearl.bat` → **Run as administrator**. `start-pearl.bat` already mines on `prl.kryptex.network:7048` with `prl-eu.kryptex.network:7048` as backup pool. Other coins use `start-quantus.bat`, `start-vearl.bat` and `start-parano1d.bat` the same way.
@@ -295,7 +295,8 @@ azminer -a <coin> -o <pool> -u <wallet>[.worker] [options]
 Run `-list` to see each GPU's index, then pass the ones you want to `-g`:
 
 ```bash
-./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1 -g 0,2   # GPU 0 and GPU 2 only
+./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1 -g 0,2       # GPU 0 and GPU 2 only
+./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1 -g 0,1,2,4   # 5-GPU rig, GPU 3 left out
 ./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1 -g all   # every GPU (default)
 ```
 
@@ -341,8 +342,8 @@ Put your settings in a JSON file and start AZminer with `-config`. Useful for ri
   "wal": "YOUR_WALLET",
   "worker": "rig1",
   "pool2": "prl-eu.kryptex.network:7048",
-  "cclock-lock": [1500, 1400],
-  "mclock-lock": [810, 810],
+  "cclock-lock": [1500, 1500, 1450, 1450, 1400],
+  "mclock-lock": [810, 810, 810, 405, 405],
   "tt": 65
 }
 ```
@@ -492,18 +493,46 @@ An **offset** moves the card's normal clock up or down instead of fixing it. Use
 Every clock, power, fan and temperature option takes either:
 
 - **One value:** used for every GPU. `-lcc 1500`
-- **A comma list:** one value per GPU, in the order of `-list`. `-lcc 1500,1400`
+- **A comma list:** one value per GPU, in the order of `-list`. `-lcc 1500,1500,1450,1450,1400`
+
+A 5-GPU rig, every card the same:
 
 ```bash
-# GPU 0: core 1500, memory 405 · GPU 1: core 1400, memory 810
-./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1 -lcc 1500,1400 -lmc 405,810
+./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1 -lcc 1500 -lmc 810
 ```
 
-With `-g`, the list follows the GPUs you picked:
+The same rig, each card tuned on its own:
 
 ```bash
-# Only GPU 0 and GPU 2 mine. GPU 0: core 1500 · GPU 2: core 1400
-./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1 -g 0,2 -lcc 1500,1400
+./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1 \
+  -lcc 1500,1500,1450,1450,1400 \
+  -lmc 810,810,810,405,405
+```
+
+| GPU | 0 | 1 | 2 | 3 | 4 |
+| --- | --- | --- | --- | --- | --- |
+| Core lock (MHz) | 1500 | 1500 | 1450 | 1450 | 1400 |
+| Memory lock (MHz) | 810 | 810 | 810 | 405 | 405 |
+
+Temperature limits per card work the same way, e.g. hotter cards pause earlier:
+
+```bash
+./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1 \
+  -lcc 1500,1500,1450,1450,1400 -lmc 810 \
+  -tt 65 -tstop 85,85,85,80,80 -tstart 75,75,75,70,70
+```
+
+With `-g`, the list follows the GPUs you picked, in order:
+
+```bash
+# 5-GPU rig, GPU 3 left out. Values go to GPU 0, 1, 2 and 4
+./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1 -g 0,1,2,4 -lcc 1500,1500,1450,1400
+```
+
+Windows `start-pearl.bat`, same 5-GPU tuning:
+
+```bat
+set "EXTRA=-lcc 1500,1500,1450,1450,1400 -lmc 810,810,810,405,405"
 ```
 
 A list longer than the number of GPUs is rejected with `too many values (max … GPUs)`.
@@ -712,7 +741,7 @@ Find the message from your log in the tables below. Messages are shown as AZmine
 | Message | Cause | Fix |
 | --- | --- | --- |
 | GPU missing from `-list` / `cannot query CUDA devices` | Driver not loaded or too old | Install or update the NVIDIA driver (RTX 50: 570+), then reboot. Check with `nvidia-smi` |
-| `duplicate GPU index` / `invalid GPU index` / `device list contains an empty entry` | Bad `-g` list | Use indices from `-list`, e.g. `-g 0,1` |
+| `duplicate GPU index` / `invalid GPU index` / `device list contains an empty entry` | Bad `-g` list | Use indices from `-list`, e.g. `-g 0,1,2,3` |
 | `GPU is lost` | The GPU crashed, usually from an unstable OC or too little power | Reboot, lower the core lock or offset, check risers and PSU |
 | `PCI bus id … is shared by multiple CUDA devices (MIG?)` | MIG mode or virtual GPU | Disable MIG; that GPU mines but without clock and fan control |
 | Hashrate lower than expected | Wrong coin, thermal pause, power limit or OC | Remove OC options, check temperature and `-powlim`, compare with the hashrates on [azminer.app](https://azminer.app/#benchmarks) |
