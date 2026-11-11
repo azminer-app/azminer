@@ -185,7 +185,7 @@ v1.3.0 adds a further small Pearl and Quantus hashrate gain with better efficien
 
 ## Options
 
-Run `azminer --help` for the complete reference. Long options accept both `-long` and `--long`.
+**Every option, with values and examples: [docs/OPTIONS.md](docs/OPTIONS.md).** Long options accept both `-long` and `--long`.
 
 | Option | Purpose |
 | --- | --- |
