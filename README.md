@@ -371,7 +371,7 @@ Rules:
 ### Every option (`azminer --help`)
 
 <details>
-<summary><strong>Show the full <code>--help</code> output (v1.3.0)</strong></summary>
+<summary><strong>Show the full <code>--help</code> output (v1.3.1)</strong></summary>
 
 ```text
 USAGE:
