@@ -56,7 +56,7 @@ Linux: copy one line, replace `YOUR_WALLET` with your address, run. On Windows, 
 <summary><strong>Pearl (PRL)</strong></summary>
 
 ```bash
-curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-linux-x86_64 && chmod +x azminer && \
+curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.3.2/azminer-v1.3.2-linux-x86_64 && chmod +x azminer && \
 ./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1
 ```
 
@@ -66,7 +66,7 @@ curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.
 <summary><strong>Quantus</strong></summary>
 
 ```bash
-curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-linux-x86_64 && chmod +x azminer && \
+curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.3.2/azminer-v1.3.2-linux-x86_64 && chmod +x azminer && \
 ./azminer -a quantus -o qtc.kryptex.network:7049 -u YOUR_WALLET.rig1
 ```
 
@@ -76,7 +76,7 @@ curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.
 <summary><strong>Vearl</strong></summary>
 
 ```bash
-curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-linux-x86_64 && chmod +x azminer && \
+curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.3.2/azminer-v1.3.2-linux-x86_64 && chmod +x azminer && \
 ./azminer -a vearl -o pool.vearl.org:3333 -u YOUR_WALLET.rig1
 ```
 
@@ -86,7 +86,7 @@ curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.
 <summary><strong>Parano1d</strong></summary>
 
 ```bash
-curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-linux-x86_64 && chmod +x azminer && \
+curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.3.2/azminer-v1.3.2-linux-x86_64 && chmod +x azminer && \
 ./azminer -a parano1d -o stratum+ssl://stratum.innovlab.cc:19601 -u YOUR_WALLET.rig1
 ```
 
@@ -113,7 +113,7 @@ Create a flight sheet: Coin **PRL**, your wallet, Pool **Configure in miner**, M
 | Field | Value |
 | --- | --- |
 | Miner name | `azminer` |
-| Installation URL | `https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0.tar.gz` |
+| Installation URL | `https://github.com/azminer-app/azminer/releases/download/v1.3.2/azminer-v1.3.2.tar.gz` |
 | Hash algorithm | `pearlhash` (other coins: `quantus`, `vearl`, `parano1d`) |
 | Wallet and worker template | `%WAL%.%WORKER_NAME%` |
 | Pool URL | `prl.kryptex.network:7048` |
@@ -142,7 +142,7 @@ The file downloads AZminer, checks its SHA-256, starts mining and restarts the m
 
 **Option 2 · ZIP package**
 
-1. Download the [Windows ZIP](https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-windows-x86_64.zip) and extract it to a folder without spaces, such as `C:\azminer`.
+1. Download the [Windows ZIP](https://github.com/azminer-app/azminer/releases/download/v1.3.2/azminer-v1.3.2-windows-x86_64.zip) and extract it to a folder without spaces, such as `C:\azminer`.
 2. Right-click `start-pearl.bat`, choose **Open with → Notepad**, and replace `YOUR_PEARL_WALLET` with your Pearl address. Save.
 3. Double-click `start-pearl.bat`.
 
@@ -174,7 +174,7 @@ Clock, power and fan options need Administrator: right-click `start-pearl.bat` �
 ### Linux
 
 ```bash
-curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-linux-x86_64
+curl -fL -o azminer https://github.com/azminer-app/azminer/releases/download/v1.3.2/azminer-v1.3.2-linux-x86_64
 chmod +x azminer
 ./azminer -a pearl -o prl.kryptex.network:7048 -u YOUR_WALLET.rig1
 ```
@@ -183,20 +183,20 @@ Needs an NVIDIA driver and GLIBC 2.28 or newer. Check which GPUs AZminer sees wi
 
 ## Download
 
-Current version: **v1.3.0** · [all releases and changelogs](https://github.com/azminer-app/azminer/releases)
+Current version: **v1.3.2** · [all releases and changelogs](https://github.com/azminer-app/azminer/releases)
 
 | Platform | File | Requirements |
 | --- | --- | --- |
-| **Windows x86_64** | [azminer-v1.3.0-windows-x86_64.zip](https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-windows-x86_64.zip) | Windows 10/11, NVIDIA driver |
-| **Linux x86_64** | [azminer-v1.3.0-linux-x86_64](https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0-linux-x86_64) | GLIBC 2.28+, NVIDIA driver |
-| **HiveOS** | [azminer-v1.3.0.tar.gz](https://github.com/azminer-app/azminer/releases/download/v1.3.0/azminer-v1.3.0.tar.gz) | HiveOS custom miner bundle |
+| **Windows x86_64** | [azminer-v1.3.2-windows-x86_64.zip](https://github.com/azminer-app/azminer/releases/download/v1.3.2/azminer-v1.3.2-windows-x86_64.zip) | Windows 10/11, NVIDIA driver |
+| **Linux x86_64** | [azminer-v1.3.2-linux-x86_64](https://github.com/azminer-app/azminer/releases/download/v1.3.2/azminer-v1.3.2-linux-x86_64) | GLIBC 2.28+, NVIDIA driver |
+| **HiveOS** | [azminer-v1.3.2.tar.gz](https://github.com/azminer-app/azminer/releases/download/v1.3.2/azminer-v1.3.2.tar.gz) | HiveOS custom miner bundle |
 
-**New in v1.3.0:** core and memory clock locks (`-lcc`, `-lmc`), NVIDIA CMP card support on Linux and HiveOS, and a further small Pearl and Quantus hashrate gain.
+**New in v1.3.2:** higher Pearl hashrate on RTX 20xx, 30xx, 40xx and 50xx, and higher Quantus hashrate on most GPU series. v1.3.0 added core and memory clock locks (`-lcc`, `-lmc`) and NVIDIA CMP card support on Linux and HiveOS.
 
 <details>
 <summary><strong>Verify a download (SHA-256)</strong></summary>
 
-Download [SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.3.0/SHA256SUMS) from the same release and keep the original filenames.
+Download [SHA256SUMS](https://github.com/azminer-app/azminer/releases/download/v1.3.2/SHA256SUMS) from the same release and keep the original filenames.
 
 ```bash
 # Linux
@@ -205,7 +205,7 @@ sha256sum --ignore-missing -c SHA256SUMS
 
 ```powershell
 # Windows PowerShell
-Get-FileHash .\azminer-v1.3.0-windows-x86_64.zip -Algorithm SHA256
+Get-FileHash .\azminer-v1.3.2-windows-x86_64.zip -Algorithm SHA256
 ```
 
 Compare the hash with the line for that file in `SHA256SUMS`. Download AZminer only from this repository or azminer.app.
@@ -371,7 +371,7 @@ Rules:
 ### Every option (`azminer --help`)
 
 <details>
-<summary><strong>Show the full <code>--help</code> output (v1.3.0)</strong></summary>
+<summary><strong>Show the full <code>--help</code> output (v1.3.2)</strong></summary>
 
 ```text
 USAGE:
